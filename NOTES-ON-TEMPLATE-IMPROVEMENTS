@@ -1,0 +1,87 @@
+Possible improvements to the proposal template system
+
+* Autogenerate files at build?  [how easily is this supported on
+  Windows?]  It would prevent people from editing them instead of
+  personnel.config.  Add a big warning at the top of the generated
+  files not to edit?
+
+* People don't get that bibliographies in bios must have labels
+  distinct from those used in other bios or the main bibliography.
+  There must be a better way.
+
+* personnel.config should also generate commands to expand each
+  participant's name consistently with how it appears in personnel.config.
+
+* A configuration file for institutional participation in portions of
+  the project to allow automatic processing to ensure consistency?
+
+* Bring back different content builds (full, technical-only, etc.).
+  But make the full build the default.
+
+* Autogeneration for personnel does not handle the case of (last) name
+  collisions.
+
+* Autogen for other-support should not include participants at
+  unfunded institutions [workaround: can be done manually]
+
+* Need to give labs who haven't submitted FWP, cover, etc. a simple
+  path to get the narrative in a form they can assemble
+  themselves. Issues include page numbers on front matter that is
+  generated, etc. [workaround: generate placeholders with proper
+  number of pages]
+
+* Maybe force 'make check' following every build?
+
+* Are Personal bib files the way to go to avoid editing conflicts?
+  (But they likely lead to duplicate bibtex entries or if the keys are
+  different multiple identical citations)
+
+* Is there a better way to do acronyms? [see glossaries package?]
+
+* hyperlinks to cites? [Conflicts with collapsing ranges]
+
+* hyperlinks to acronyms?
+
+* Ability to slightly scale included PDF pages to allow space for
+  headers?  Mainly for budgets.
+
+* More modern bst file to use?
+
+* Figure out how to use latexdiff
+
+* Makefile has a lot of explicit filenames that could be parameterized
+  (say you wanted to name your top files something other than
+  proposal.*).
+
+* Problems with minitoc contents on lab vs grants build.  Selective
+  use of \adjustmtc at table of contents seems to fix, but this is
+  probably not the root cause.
+
+* Problems with acronym expansion when generating standalone abstract.
+  Seems that adding \typeout statements somehow effect results, but of
+  course that shouldn't be.
+
+* Grants.gov lately requires a cover page in front of narrative.
+  Creation could be at least partly automated.
+
+* Do a better job with default configuration and/or version control of
+  configure.tex
+
+* Acronyms are not a good solution for some institution names (when
+  the full name and the short version are too close).
+
+* Why does vertical spacing after the Project Description chapter
+  heading change between lab and grants.gov builds?  In one case,
+  there is 0.5in of whitespace, while in the other there is none.  Not
+  only is it wierd, it can mess up senitive formatting tricks.
+
+* Grants.gov requires separate abstract to be attached.  Suggest using
+  separate variant of proposal.tex at top level.  Watch out for name
+  conflict with abstract.tex file.
+
+* Switch to using latexmk?
+
+* Maybe institutional cover pages should be generated separately from
+  main proposal body and let user combine them with Acrobat or another
+  such tool?
+  

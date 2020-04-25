@@ -1,0 +1,13 @@
+BibTeX files referenced by the technical narrative of the proposal.
+
+These bib files need to be listed in the \bibliography command in
+../proposal.tex.
+
+You are free to organize these files however you like. A single
+file. A file per contributor.  A file per section.  Whatever.  They
+all have advantages and disadvantages.
+
+But none the approaches protects you from duplicates.  BibTeX will
+catch duplicate *keys* (whether they have the same content or not).
+But the same bibitem with *different* keys will not be caught.  You
+have to check the resulting bibliography carefully for duplicates.

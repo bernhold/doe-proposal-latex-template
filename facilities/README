@@ -1,0 +1,10 @@
+Description of facilities and resources.  One per institution.
+
+Files are included by commands in ../facilities.tex and the
+expectation the expectation is that file names will be based on the
+institution's name, e.g., ornl.tex or ornl.pdf
+
+The smartinclude command will look for a TeX file, then a PDF file, so
+either can be supplied.  TeX following an agreed format will give the
+greatest level of consistency and polish to this section, but PDF is
+better than nothing.

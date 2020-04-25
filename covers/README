@@ -1,0 +1,5 @@
+Cover pages for labs, as specified in the FOA (grants.gov users have
+an SF424 form, which does NOT need to be included here).
+
+Files are included by commands in ../proposal.tex.  The expectation is
+a single PDF per institution, named for the institution.

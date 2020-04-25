@@ -1,0 +1,575 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Setup packages, style, additional commands, etc.
+% $Id$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\zapspace}[0]{}
+\usepackage[letterpaper,textheight=9in,textwidth=6.5in,margin=1in]{geometry}
+
+\usepackage[utf8]{inputenc}     % Better for text pasted from Word & such
+\usepackage[T1]{fontenc}
+\usepackage{bigstrut}           % Used by Excel2LATeX exports
+\usepackage{amsmath}            % Used by OpenOffice LaTeX exporter
+% packages above (probably amsmath) need to preceed fxfonts
+\usepackage{txfonts}            % Use native postscript fonts
+
+\usepackage{cite}
+
+% For some math symbols
+\usepackage{wasysym}
+\usepackage{hhline}  % horizontal lines
+\usepackage{subfig} % for subfigures
+
+\usepackage{varioref}
+
+\usepackage{url}
+\usepackage{color}
+%%%\usepackage{svn}
+\usepackage{listings}
+%%\usepackage[bookmarks=false,pdfpagelayout=SinglePage]{hyperref}
+\usepackage[bookmarksopen=true,bookmarksopenlevel=0,pdfpagelayout=SinglePage]{hyperref}
+
+\usepackage{longtable}
+% Default caption width for longtable environments
+\setlength{\LTcapwidth}{\textwidth}
+\usepackage{multirow}
+\usepackage[font=it,labelfont=bf]{caption}
+\usepackage{sidecap}            % Alternative to constructing minipages
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{rotating}
+
+\usepackage{fancyhdr}
+\usepackage{graphicx} 
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{pdfpages}
+\usepackage[compact]{titlesec}
+%%% \usepackage[iso]{datetime}
+%%% \settimeformat{ampmtime}        % Override iso time format
+%%%\usepackage{xcomment}
+%%%\usepackage{paralist}           % Provides compact versions of lists
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{rotating}
+\usepackage{listings}
+\usepackage{calc}                  % Used in participant table construction
+
+\usepackage{minitoc}            % Load after caption (if used)
+
+%%%%% Packages to avoid, and alternatives
+% epsfig: already using graphicx
+% here: use [!ht] or float.sty [H] instead
+% times: txfonts
+
+% remove red border around links (comment out if you want the border)
+%\hypersetup{pdfborder={0 0 0}}
+\hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue,pdfborder={0 0 0}}
+
+%% % Force pdftex to copy fonts from included PDFs
+%% % For pdftex more recent than 2007
+%% \pdfinclusioncopyfonts=1
+
+%%%%% Read in user configuration %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%
+%%%%% Set defaults, then read in user's configuration file (if one
+%%%%% exists) to override them.
+
+\newcommand{\proposalinstitution}{io} %%% One of the participating insts
+\newcommand{\proposallead}{ib}      %%% institution leading the proposal
+\newcommand{\proposalcontent}{lab}  %%% technical|lab|grants|abstract|public
+\newcommand{\proposalversion}{final} %%% draft|final
+
+\IfFileExists{configure.tex}{
+   \input{configure}
+}{}
+
+%%%%% Control what is processed %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Requires ifthen package loaded
+
+%% \input{output-controls}
+
+%%%%% Munge proposal title as required by FOA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The FOA no longer requires changing the proposal title for lead or
+% partner submissions
+
+\newcommand{\proposaltitle}{\baseproposaltitle}
+
+%%%%% Headers and footers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhead{}
+\fancyhead[R]{\emph{\rightmark}}
+\fancyhead[L]{\emph{\leftmark}}
+
+%%%%% Table of contents %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addtocounter{secnumdepth}{1} %%%%% Number subsubsections
+\addtocounter{tocdepth}{1}    %%%%% Display subsubsections in TOC
+
+% Use minitoc to generate chapter-level TOCs to help navigate bios, C&P, etc.
+\renewcommand{\mtcSfont}{\normalsize\rmfamily}
+\tightmtctrue %% Tighten up line spacing
+%%\setlength{\mtcindent}{-0.5in} %% Compensate for default indentation
+\nomtcrule
+
+%\mtcsetrules{minitoc}{off}
+
+%%%%% Section headings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Uses titlesec package
+
+\titleformat{\chapter}[block]
+{\normalfont\Huge\bfseries}{\thechapter.}{10pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-0.25in}{0pt} %%% * kill first para indentation
+
+% Saves about 20 lines in current proposal
+%\titlespacing*{\paragraph} {0pt}{0ex plus 1ex minus .2ex}{1em}
+
+%% % Default spacings, for reference
+%% \titlespacing*{\chapter} {0pt}{50pt}{40pt}
+%% \titlespacing*{\section} {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+%% \titlespacing*{\subsection} {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%% \titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%% \titlespacing*{\paragraph} {0pt}{3.25ex plus 1ex minus .2ex}{1em}
+%% \titlespacing*{\subparagraph} {\parindent}{3.25ex plus 1ex minus .2ex}{1em}
+
+%%%%% Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Best to change from defaults only at the very end, to refine space.
+
+%%\setlength{\textfloatsep}{0pt} % 20pt
+%% \setlength{\floatsep}{0pt} % 12pt
+%% \setlength{\intextsep}{0pt} % 12pt
+
+%% \setlength{\dblfloatsep}{6pt} % 12pt
+\setlength{\abovecaptionskip}{2pt} % 10pt
+\setlength{\belowcaptionskip}{2pt} % ??
+
+%% Parameters influencing how LaTeX places floats
+
+%% % General parameters for all pages:
+%% \renewcommand\topfraction{.7}          %%% Default: 0.7
+%% \renewcommand\bottomfraction{.3}       %%% Default: 0.3
+
+%% % Parameters for TEXT (not float) pages
+%% \setcounter{topnumber}{2}              %%% Default: 2
+%% \setcounter{bottomnumber}{1}           %%% Default: 1
+%% \setcounter{totalnumber}{3}            %%% Default: 3
+%% \setcounter{dbltopnumber}{2}           %%% Default: 2
+%% \renewcommand\textfraction{.2}         %%% Default: 0.2
+%% \renewcommand\dbltopfraction{.7}       %%% Default: 0.7
+
+%% % Parameters for FLOAT (not text) pages
+%% \renewcommand\floatpagefraction{.5}    %%% Default: 0.5
+%% \renewcommand\dblfloatpagefraction{.5} %%% Default: 0.5
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Comment-like commands for draft mode
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% % when \boolean{printcomments} is true (draft mode) we print these
+%% % when \boolean{printcomments} is false (final mode) we don't
+%% %
+%% % NOTE: make sure you have appropriate definitions in BOTH the
+%% % if-clause and the then-clause!
+
+%% \ifthenelse{\boolean{printcomments}}{
+%%   \newcommand{\cvsid}{{\footnotesize\emph{\color{blue}Last checkin: \RCSId}}}
+
+%%   \newcommand{\svnid}{{\footnotesize\emph{\color{blue}Last checkin: \SVNId}}}
+
+%%   \newcommand{\budgetwriter}[2]
+%%     {{\footnotesize\emph{\color{blue}Page budget: {\color{red}#1}, Lead writer: {\color{red}#2}}}}
+
+%%   \newcommand{\comment}[1]
+%%     {{\color{cyan}\textsf{#1}}}
+
+%%   \newcommand{\rcomment}[1]
+%%     {{\color{red}\textsf{#1}}}
+
+%%   \newcommand\todo[1]{{\color{red}\bf [TODO: #1]}}
+
+%% }{ %%%%% THEN %%%%%
+%%   \newcommand{\cvsid}{}
+
+%%   \newcommand{\svnid}{}
+
+%%   \newcommand{\budgetwriter}[2]{}
+
+%%   \newcommand{\comment}[1]{}
+%%   \newcommand{\rcomment}[1]{}
+
+%%   \newcommand{\todo}[1]{}
+
+%% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set default style for code displays in the listings package
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\lstset{basicstyle=\ttfamily}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Misc conveniences
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\coordinator}[1]{\noindent\textnormal{[Coordinator: #1]}}
+\newcommand{\coordinators}[1]{\noindent\textnormal{[Coordinators: #1]}}
+\newcommand{\coordsection}[2]{\section[#1]{#1\ \ \coordinator{#2}}} 
+\newcommand{\coordssection}[2]{\section[#1]{#1\ \ \coordinators{#2}}} 
+\newcommand{\coordsubsection}[2]{\subsection[#1]{#1\ \ \coordinator{#2}}} 
+
+\newcommand{\participants}[1]{\noindent\textnormal{[Participants: #1]}}
+
+% The mbox forces the contents onto a single line of text, making
+% wider rather than wrapping, if necessary.
+\newcommand{\coordparts}[2]{\vspace{-5pt}\noindent\mbox{
+    \textbf{[Coordinator:} \emph{#1}; \textbf{Participants:} \emph{#2}
+      \textbf{]}}\smallskip\noindent}
+
+% Define a gray color for use in the participant table
+\definecolor{lt-gray}{gray}{0.25}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Specialized lists using the enumitem package
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A list for the milestone table that removes as much vertical and
+% horizontal space as possible.
+\newlist{milestones}{itemize}{1}
+\setlist[milestones]{label=\textbullet,nosep,leftmargin=*,
+  before=\vspace{-12pt},after=\vspace{-12pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Specialized sectioning commands for bios, other-support, facilities, sows
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Arguments should be of the form {David E.~Bernholdt --- ORNL}{bernholdt}
+\newcommand{\biosection}[2]{
+  \section*{#1}
+  \markright{#1}
+  \phantomsection % Needed by hyperref because of the unnumbered section
+  \addcontentsline{toc}{section}{\numberline {}#1}
+  \label{sec:bio-#2}
+}
+
+% Arguments should be of the form {David E.~Bernholdt --- ORNL}{bernholdt}
+\newcommand{\supportsection}[2]{
+  \section*{#1}
+  \markright{#1}
+  \phantomsection % Needed by hyperref because of the unnumbered section
+  \addcontentsline{toc}{section}{\numberline {}#1}
+  \label{sec:support-#2}
+}
+
+% Arguments should be of the form {Oak Ridge National Laboratory}{ornl}
+\newcommand{\facilitiessection}[2]{
+  \section*{#1}
+  \markright{#1}
+  \phantomsection % Needed by hyperref because of the unnumbered section
+  \addcontentsline{toc}{section}{\numberline {}#1}
+  \label{sec:facilities-#2}
+}
+
+% Arguments should be of the form {Oak Ridge National Laboratory}{ornl}
+\newcommand{\sowsection}[2]{
+  \section*{#1 Statement of Work}
+  \markright{#1}
+  \phantomsection % Needed by hyperref because of the unnumbered section
+  \addcontentsline{toc}{section}{\numberline {}#1}
+  \label{sec:sow-#2}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Redefine the bibliography to be a numbered section
+% Also redefine the heading marks it sets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewenvironment{thebibliography}[1]
+     {\ifthenelse{\boolean{starredbibliography}}{%
+         \chapter*{\bibname}%
+     }{ % else
+         \chapter{\bibname}%
+     }
+      \@mkboth{\bibname}{}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create a version of thebibliography for the publication lists in bio sketches
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\newenvironment{thebiobibliography}[1]
+     {\subsection*{\bibname}%
+      %\@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebiobibliography' environment}}%
+      \endlist}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Redefine the tableofcontents to not uppercase the heading marks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewcommand\tableofcontents{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\contentsname
+        \@mkboth{\contentsname}{}}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+    }
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Smart inclusion of non-technical inputs (TEX preferred, otherwise PDF)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Shorthand for providing and initially setting
+\newcommand{\provBoolDflt}[2]{
+   \provideboolean{#1}
+   \setboolean{#1}{#2}
+}
+% smartincludes should warn when expected files are not found
+\provBoolDflt{printmissingwarnings}{true}
+% missing smartincludes should appear in table of contents
+\provBoolDflt{printmissingintoc}{true}
+
+\newcommand{\smartinclude}[2]{
+   \IfFileExists{#2.tex}{
+      % Assume tex file contains any heading/TOC adjustments
+      \input{#2}
+   }{
+      \IfFileExists{#2.pdf}{
+
+        % Set headers and TOC entry
+        \markright{#1}
+        \phantomsection % Needed by hyperref because of the unnumbered section
+        \addcontentsline{toc}{section}{\numberline {}#1}
+
+         % Use fancy page style to put headers and page numbers on the
+         % included pages for easier navigation.  With luck, the included
+         % pages will not overlap these marks.
+         \includepdf[pages=-,pagecommand={\thispagestyle{fancy}}]{#2}
+      }{
+         % If the desired PDF file doesn't exist, warn about it but continue
+
+         % May not want to include missing files in table of contents
+         \ifthenelse{\boolean{printmissingintoc}}{
+           % Set headers and TOC entry
+           \markright{#1}
+           \phantomsection % Needed by hyperref because of the unnumbered section
+           \addcontentsline{toc}{section}{\numberline {}#1}
+         }{}
+
+         \ifthenelse{\boolean{printmissingwarnings}}{
+           \begin{center} 
+              \textbf{\color{red}\Large No file found for '#1'!\\
+                      Tried #2.tex and #2.pdf} \\
+           \end{center}
+           \typeout{smartinclude: WARNING: File not found: #2.tex or #2.pdf}
+         }{}
+      }     
+   }
+}
+
+% empty page style version
+\newcommand{\smartincludeempty}[2]{
+   \IfFileExists{#2.tex}{
+      % Assume tex file contains any heading/TOC adjustments
+      \input{#2}
+   }{
+      \IfFileExists{#2.pdf}{
+
+        \newpage
+        % Set headers and TOC entry
+        \markright{#1}
+        \phantomsection % Needed by hyperref because of the unnumbered section
+        \addcontentsline{toc}{section}{\numberline {}#1}
+
+         % Use fancy page style to put headers and page numbers on the
+         % included pages for easier navigation.  With luck, the included
+         % pages will not overlap these marks.
+         \includepdf[pages=-,pagecommand={\thispagestyle{empty}}]{#2}
+      }{
+         % If the desired PDF file doesn't exist, warn about it but continue
+
+         % May not want to include missing files in table of contents
+         \ifthenelse{\boolean{printmissingintoc}}{
+           \newpage
+           % Set headers and TOC entry
+           \markright{#1}
+           \phantomsection % Needed by hyperref because of the unnumbered section
+           \addcontentsline{toc}{section}{\numberline {}#1}
+         }{}
+
+         \ifthenelse{\boolean{printmissingwarnings}}{
+           \begin{center}
+              \textbf{\color{red}\Large No file found for '#1'!\\
+                      Tried #2.tex and #2.pdf} \\
+           \end{center}
+           \typeout{smartinclude: WARNING: File not found: #2.tex or #2.pdf}
+         }{}
+      }     
+   }
+}
+
+% plain page style version
+\newcommand{\smartincludeplain}[2]{
+   \IfFileExists{#2.tex}{
+      % Assume tex file contains any heading/TOC adjustments
+      \input{#2}
+   }{
+      \IfFileExists{#2.pdf}{
+
+        \newpage
+        % Set headers and TOC entry
+        \markright{#1}
+        \phantomsection % Needed by hyperref because of the unnumbered section
+        \addcontentsline{toc}{section}{\numberline {}#1}
+
+         % Use fancy page style to put headers and page numbers on the
+         % included pages for easier navigation.  With luck, the included
+         % pages will not overlap these marks.
+         \includepdf[pages=-,pagecommand={\thispagestyle{plain}}]{#2}
+      }{
+         % If the desired PDF file doesn't exist, warn about it but continue
+
+         % May not want to include missing files in table of contents
+         \ifthenelse{\boolean{printmissingintoc}}{
+           \newpage
+           % Set headers and TOC entry
+           \markright{#1}
+           \phantomsection % Needed by hyperref because of the unnumbered section
+           \addcontentsline{toc}{section}{\numberline {}#1}
+         }{}
+
+         \ifthenelse{\boolean{printmissingwarnings}}{
+           \begin{center}
+              \textbf{\color{red}\Large No file found for '#1'!\\
+                      Tried #2.tex and #2.pdf} \\
+           \end{center}
+           \typeout{smartinclude: WARNING: File not found: #2.tex or #2.pdf}
+         }{}
+      }     
+   }
+}
+
+% empty page style CHAPTER version
+\newcommand{\smartincludeemptych}[2]{
+   \IfFileExists{#2.tex}{
+      % Assume tex file contains any heading/TOC adjustments
+      \input{#2}
+   }{
+      \IfFileExists{#2.pdf}{
+
+        \newpage
+        % Set headers and TOC entry
+        \markboth{#1}{}
+        \phantomsection % Needed by hyperref because of the unnumbered section
+        %%      \addcontentsline{toc}{chapter}{#1}
+        \addstarredchapter{#1}
+        %%      \adjustmtc
+
+         % Use fancy page style to put headers and page numbers on the
+         % included pages for easier navigation.  With luck, the included
+         % pages will not overlap these marks.
+         \includepdf[pages=-,pagecommand={\thispagestyle{empty}}]{#2}
+      }{
+         % If the desired PDF file doesn't exist, warn about it but continue
+
+         % May not want to include missing files in table of contents
+         \ifthenelse{\boolean{printmissingintoc}}{
+           \newpage
+           % Set headers and TOC entry
+           \markboth{#1}{}
+           \phantomsection % Needed by hyperref because of the unnumbered section
+           %%      \addcontentsline{toc}{chapter}{#1}
+           \addstarredchapter{#1}
+           %%      \adjustmtc
+         }{}
+
+         \ifthenelse{\boolean{printmissingwarnings}}{
+           \begin{center}
+              \textbf{\color{red}\Large No file found for '#1'!\\
+                      Tried #2.tex and #2.pdf} \\
+           \end{center}
+           \typeout{smartinclude: WARNING: File not found: #2.tex or #2.pdf}
+         }{}
+      }     
+   }
+}
+
+% plain page style CHAPTER version
+\newcommand{\smartincludeplainch}[2]{
+   \IfFileExists{#2.tex}{
+      % Assume tex file contains any heading/TOC adjustments
+      \input{#2}
+   }{
+      \IfFileExists{#2.pdf}{
+
+        \newpage
+        % Set headers and TOC entry
+        \markboth{#1}{}
+        \phantomsection % Needed by hyperref because of the unnumbered section
+        %%      \addcontentsline{toc}{chapter}{#1}
+        \addstarredchapter{#1}
+        %%      \adjustmtc
+
+         % Use fancy page style to put headers and page numbers on the
+         % included pages for easier navigation.  With luck, the included
+         % pages will not overlap these marks.
+         \includepdf[pages=-,pagecommand={\thispagestyle{plain}}]{#2}
+      }{
+         % If the desired PDF file doesn't exist, warn about it but continue
+
+         % May not want to include missing files in table of contents
+         \ifthenelse{\boolean{printmissingintoc}}{
+           \newpage
+           % Set headers and TOC entry
+           \markboth{#1}{}
+           \phantomsection % Needed by hyperref because of the unnumbered section
+           %%      \addcontentsline{toc}{chapter}{#1}
+           \addstarredchapter{#1}
+           %%      \adjustmtc
+         }{}
+
+         \ifthenelse{\boolean{printmissingwarnings}}{
+           \begin{center}
+              \textbf{\color{red}\Large No file found for '#1'!\\
+                      Tried #2.tex and #2.pdf} \\
+           \end{center}
+           \typeout{smartinclude: WARNING: File not found: #2.tex or #2.pdf}
+         }{}
+      }     
+   }
+}

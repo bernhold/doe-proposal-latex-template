@@ -1,0 +1,55 @@
+% Special formatting for the abstract
+\titleformat{\chapter}[block]
+%{\filcenter\normalfont\huge\bfseries}{}{0pt}{\huge}
+{\filcenter\normalfont\LARGE\bfseries}{}{0pt}{\LARGE}
+%{\filcenter\normalfont\Large\bfseries}{}{0pt}{\Large}
+%{\filcenter\normalfont\Large\bfseries}{}{0pt}{\large}
+\titlespacing*{\chapter}{0pt}{-0.35in}{0pt} %%% * kill first para indentation
+
+\chapter*{\MakeUppercase{\proposaltitle}}
+\phantomsection
+\addstarredchapter{Abstract}
+%%\adjustmtc
+\markboth{Abstract}{}
+\label{sec:abstract}
+
+% Restore standard formatting for chapter titles
+\titleformat{\chapter}[block]
+{\normalfont\Huge\bfseries}{\thechapter.}{10pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-0.25in}{0pt} %%% * kill first para indentation
+
+%% \ifthenelse{\equal{\proposalcontent}{abstract}}{ % Standalone abstract-only
+%%    \typeout{output-controls: empty pagestyle for standalone abstract}
+%%    \thispagestyle{empty}
+%% }{}
+
+% Vertical spacing is careful controlled in order to maximize space
+% available while maintaining a reasonable experience.
+
+\vspace{-\abovedisplayskip}
+\medskip
+
+% Lead PI slug is centered internally
+\textbf{\input{leadpi-slug}}
+
+\vspace{-\belowdisplayskip}
+\vspace{-\abovedisplayskip}
+\smallskip
+
+\begin{center}
+\input{participant-table}
+\end{center}
+
+\vspace{-\belowdisplayskip}
+\vspace{-\abovedisplayskip}
+\medskip
+
+\begin{center}
+\textbf{ABSTRACT}
+\end{center}
+
+\vspace{-\belowdisplayskip}
+
+Insert abstract text here.
+
+\vfill

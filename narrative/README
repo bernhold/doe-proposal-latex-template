@@ -1,0 +1,18 @@
+TeX sources for the technical narrative of the proposal.  
+
+Inclusion of files at the top level is defined in ../narrative.tex.
+The narrative is a chapter.  Experience suggests that a file per
+\subsection is a good granularity to minimize collisions during
+editing.  It is simplest to keep this directory flat rather than
+hierarchical, and use <section>-<subsection>.tex conventions to name
+the files.
+
+Experience also suggests that it is good to avoid explicit sections
+deeper than \subsection.  Using \paragraph or just \textbf lead-ins
+avoid sections with long strings of numbers identifying them, e.g.,
+1.2.3.4.
+
+Graphics included here should be placed in the ../graphics/ directory,
+primarily in order to keep directory listings managable.  It is also
+useful to place editable sources for graphics in that directory in
+case they need to be revised as the proposal evolves.

@@ -1,0 +1,9 @@
+This directory should hold the TeX sources for any appendices for the
+proposal.  
+
+The most common appendix is for letters of collaboration. The
+convention is that collaborations.tex goes here, and includes PDFs of
+the letters in ../letters/ (they could be here, but this gets them out
+of the way a little more).
+
+As always, other graphics should live in ../graphics/
