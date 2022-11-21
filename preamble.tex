@@ -60,7 +60,7 @@
 \usepackage{appendix}
 \usepackage[chapter,numbib]{tocbibind}
 \usepackage{etoc}             %% To get easy local table of contents
-
+\usepackage{todonotes}
 \usepackage{lipsum}           %% Used for placeholder text
 
 %%%%% Packages to avoid, and alternatives
@@ -82,6 +82,10 @@
 \fancyhead{}
 \fancyhead[R]{\emph{\rightmark}}
 \fancyhead[L]{\emph{\leftmark}}
+% These changes are suggested in the fancyhdr manual to eliminate complaints
+% about the headheight being too small.
+\setlength{\headheight}{14.0pt}
+\addtolength{\topmargin}{-2.0pt}
 
 %%%%% Table of contents %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
