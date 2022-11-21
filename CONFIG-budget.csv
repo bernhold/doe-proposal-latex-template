@@ -1,0 +1,24 @@
+instacro,yeari,yearii,yeariii,total
+% File must start with headers for the CSV data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Summary budget table
+% Used in: collaborative-supplement.tex
+%
+% Fields:
+%   instacro: Acronym key for institution (defined in CONFIG-institutions.csv)
+%   year<n>: Budget amount for each year of the project.  Note: This gets
+%       turned into a latex macro, the names of which can't include arabic
+%       numerals.  Use roman numerals instead.
+%   total: Total budget over whole period of performance
+%
+% Last row should be for the (fake) institution "Total" and provide the 
+% annual and cummulative total funding amounts.
+%
+% When used for display purposes, the data will be presented in the order below,
+% so you are free to organize it as you prefer.  Generally, you'll want to start
+% with the lead institution and follow with the others in alphabetical order.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+io,213,324,435,546
+ib,123,234,345,456
+iiii,321,432,543,654
+Total,999,888,777,666

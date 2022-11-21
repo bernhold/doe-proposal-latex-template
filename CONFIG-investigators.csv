@@ -1,0 +1,29 @@
+lastname,firstname,instacro,role,telephone,email
+% File must start with headers for the CSV data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Names, institutions, and roles for all investigators on the proposal
+% Used in: proposal-summary cover page
+%
+% INSTACRO should be the acronym command defined in CONFIG-institutions.csv.
+%
+% ROLE field values: DOE uses a certain terminology for the roles investigators
+% can hold.  Use the following macros, which are defined in CONFIG-roles.tex.
+%   \rolelpi = Lead PI (one per proposal)
+%   \rolecpi = co-PI (one per institution)
+%   \rolesp  = Senior Personnel (all other named investigators)
+%
+% TELEPHONE and EMAIL values are only used for lead- and co-PIs, otherwise the
+% fields can be left blank (but they must exist).
+%
+% This data will be displayed in the order below, so you are free to organize
+% as you prefer. Some suggestions:
+% 1. Lead institution followed by additional institutions in alphabetical order
+%    a. Institutional PI followed by additional investigators in alpha order
+% 2. Alphabetical by investigator name
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Honcho,Head,io,\rolelpi,(202) 555-1212,head.honcho@examle.com
+Assistant,V. Helpful,io,\rolesp,,
+Robot,Not A.,ib,\rolecpi,(312) 555-1212,robotna@example.com
+Santa,Robot,ib,\rolesp,,
+Person,Different,iiii,\rolecpi,(505) 555-1212,differentperson@example.com
+Person,Same,iiii,\rolesp,,

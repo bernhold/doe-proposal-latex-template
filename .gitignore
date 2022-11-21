@@ -1,3 +1,7 @@
+## Default PDFs built by latexmk (can be added explicitly when appropriate)
+summary.pdf
+proposal.pdf
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

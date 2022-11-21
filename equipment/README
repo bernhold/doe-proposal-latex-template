@@ -1,9 +1,9 @@
-Current and pending support of investigators, as defined in the FOA.
-One per investigator.
+Description of equipment.  One per institution.
 
-Files are included by commands in ../other-support.tex and the
+Files are included by commands in ../equipment.tex and the
 expectation the expectation is that file names will be based on the
-individual's last name, e.g., bernholdt.tex or bernholdt.pdf.
+institution's shorthand (the instacro field in CONFIG-institutions.csv), 
+e.g., ornl.tex or ornl.pdf
 
 The smartinclude command will look for a TeX file, then a PDF file, so
 either can be supplied.  TeX following an agreed format will give the

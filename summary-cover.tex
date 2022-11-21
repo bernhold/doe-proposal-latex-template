@@ -1,0 +1,47 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cover page for project summary
+%
+% Based on DOE guidance, the cover includes the title and a table listing all
+% investigators.  The abstract is separate.
+%
+% This implementation uses the csvsimple-l3 package to read 
+% CONFIG-investigators.csv and display it as a table.  Plenty of tweaking (or
+% even wholesale replacement) opportunities if you want something different.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vfill      %% I don't think this does anything before the chapter heading
+
+\chapter*{\proposaltitle}
+
+\vspace{0.5in}   %% IMHO, fixed vertical spacing looks better than \vfill
+
+% Use csvsimple-l3 to create a table from CONFIG-investigators.csv
+%
+% The default format displays \rolelpi and \rolecpi rows in bold font on a light
+% gray background.  \rolesp is not displayed (makes the others stand out
+% more).
+%
+% Given this formatting, the most logical ordering for the input data is:
+% 1. Lead institution followed by additional institutions in alphabetical order
+%    a. Institutional PI followed by additional investigators in alpha order
+%
+% An xcolor specification for a very light gray to highlight lead PIs and co-PIs
+\definecolor{verylightgray}{rgb}{0.90,0.90,0.90}
+%
+% TODO: as written, this generates warnings about misplaced \noalign each
+% time the \rowcolor is used.  Not clear why.  Googling has so far been
+% unhelpful.
+\csvreader[
+    head to column names,
+    centered tabular = lll,
+    table head = \emph{Investigator} & \emph{Institution} & \emph{Role} \\\hline,
+    ]{CONFIG-investigators.csv}{}{%
+    \ifthenelse{\equal{\role}{\rolelpi} \OR \equal{\role}{\rolecpi}}{%
+    \rowcolor{verylightgray}%
+    \textbf{\firstname~\lastname} & \textbf{\glsentrylong{\instacro}} & \textbf{\role}
+    }{%
+    \firstname~\lastname & \glsentrylong{\instacro} &
+    }%
+}
+
+\vfill

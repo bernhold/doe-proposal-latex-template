@@ -1,0 +1,38 @@
+% Proposal title page template
+
+% Some of the data we need has been shoehorned into acronym definitions
+% in make-institution-acronyms.tex.  We need these to access it.
+\renewcommand{\pocacro}{\instacro}\xappto\pocacro{poc}%
+\renewcommand{\addracro}{\instacro}\xappto\addracro{addr}%
+
+\chapter*{\proposaltitle}
+
+\vspace{0.5in}
+
+\begin{tabularx}{\textwidth}{rX}
+Applicant: & \glsentrylong{\instacro} \\
+\\
+Street Address: & \glsentryshort{\addracro} \\
+\\
+Postal Address: & \glsentrylong{\addracro} \\
+\\
+Principal Investigator: & \firstname~\lastname \newline \telephone \quad \email \\
+\\
+Administrative Point of Contact: & \glsentryshort{\pocacro} \newline \glsentrylong{\pocacro} \\
+\\
+FOA Number: & \proposalfoa \\
+DOE/SC Program Office: & \proposaloffice \\
+DOE/SC Technical Contact: & \proposalcontact \\
+\ifthenelse{\NOT\equal{\proposalarea}{}}{%
+Research area(s): & \proposalarea \\
+}{}
+\\
+\ifthenelse{\NOT\equal{\proposalprior}{}}{%
+DOE Award Number: & \proposalprior \\
+}{}
+\ifthenelse{\NOT\equal{\proposaltracking}{}}{%
+PAMS preproposal tracking number: & \proposaltracking \\
+}{}
+\end{tabularx}
+
+\vfill

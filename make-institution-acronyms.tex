@@ -1,0 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acronym definitions for Institutions
+%
+% Read CONGIF-institutions.csv and create acronym definitions using the
+% glossaries package.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\pocacro}{poc}
+\newcommand{\addracro}{addr}
+
+\csvreader[%
+  head to column names,
+]{CONFIG-institutions.csv}{}{%
+    \newacronym{\instacro}{\shortinst}{\institution}
+    \renewcommand{\pocacro}{\instacro}\xappto\pocacro{poc}%
+    \newacronym{\pocacro}{\pocname}{\poctel \quad \pocemail}
+    \renewcommand{\addracro}{\instacro}\xappto\addracro{addr}%
+    \newacronym{\addracro}{\streetaddr}{\postaladdr}
+}

@@ -1,0 +1,69 @@
+\newpage
+
+\begin{center}
+\textbf{Collaborative Supplement}
+\end{center}
+
+\vfill
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph*{Leadership team:}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Read through CONFIG-investigators.csv and pick out lead- and co-PIs.
+% This should not require any modification as long as the config file is current.
+\csvreader[
+    head to column names,
+    centered tabular = lll,
+    filter ifthen = {\equal{\role}{\rolelpi}\OR\equal{\role}{\rolecpi}},
+    table head = \emph{Investigator} & \emph{Institution} & \emph{Role} \\\hline,
+    ]{CONFIG-investigators.csv}{}{%
+    \ifthenelse{\equal{\role}{\rolelpi}}{%
+    \textbf{\firstname~\lastname} & \textbf{\glsentrylong{\instacro}} & \textbf{\role}
+    }{%
+    \firstname~\lastname & \glsentrylong{\instacro} & \role
+    }%
+}
+
+\vfill
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph*{Leadership structure:}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vfill
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph*{Facilities, equipment, and resources:}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vfill
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph*{Mentoring and training:}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vfill
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph*{Summary budget:}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We need something to hold the modified acronym tag for the PI info
+\newcommand{\piacro}{pi}
+
+% TODO: This table needs to be modified for the number of years in the
+% proposal period of performance.  And, of course, the CONFIG-budget.csv
+% file will need to be modified correspondingly.
+%
+% TODO: Also, it would be nice to have an \hline before the total line.
+% Unfortunately, \hline has to immediately follow the (implicit) \\ at the
+% row end.  But here we're invoking the \ifthenelse to decide if this is
+% the row we want to highlight or not.  So you can't just add \hline at the
+% beginning of the true branch.
+\csvreader[
+    head to column names,
+    centered tabular = lllrrrr,
+    table head = & & & \multicolumn{4}{c}{\emph{Budget (\$ in thousands)}}\\
+        \emph{Role} & \emph{Institution} & \emph{PI} & \emph{Year 1} & \emph{Year 2} & \emph{Year 3} & \emph{Total} \\\hline,
+]{CONFIG-budget.csv}{}{%
+    \ifthenelse{\equal{\instacro}{Total}}{%
+        & \textbf{\instacro} & & \textbf{\yeari} & \textbf{\yearii} & \textbf{\yeariii} & \textbf{\total}
+    }{%
+        \renewcommand{\piacro}{\instacro}\xappto\piacro{pi}%
+        \glsentryshort{\piacro} & \glsentrylong{\instacro} & \glsentrylong{\piacro} & \yeari & \yearii & \yeariii & \total
+    }
+}

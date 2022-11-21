@@ -1,0 +1,13 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acronym definitions for Principal Investigators
+%
+% Read CONGIF-investigators.csv and create acronym definitions using the
+% glossaries package.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\csvreader[%
+  head to column names,
+  filter ifthen = {\equal{\role}{\rolelpi}\OR\equal{\role}{\rolecpi}}
+]{CONFIG-investigators.csv}{}{%
+  \xappto\instacro{pi}
+  \newacronym{\instacro}{\role}{\firstname~\lastname}
+}

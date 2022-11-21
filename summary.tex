@@ -1,0 +1,44 @@
+\documentclass[11pt,titlepage]{report}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Main file for the project summary (cover plus abstract) document
+%
+% summary-cover.tex displays the title and a table of investigators, based on
+% data in CONFIG-proposal.tex and CONFIG-investigators.csv.  If the formatting
+% is acceptable and there is sufficient space, you may not need to modify it.
+%
+% summary-abstract.tex, not surprisingly, displays the abstract.  You'll need 
+% to provide the content here.  By default, the abstract starts on a new page.
+% This is allowed by DOE's guidelines.  But if you don't like the way it looks
+% feel free to comment it out.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% Setup packages, style, etc. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{preamble} %% Use the same preamble as for the main proposal
+
+%%%%% Check for needed configuration info %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{CONFIG-proposal.tex}{%
+    \input{CONFIG-proposal}}{\typeout{!! CONFIG-proposal.tex not found}}
+\IfFileExists{CONFIG-roles.tex}{%
+    \input{CONFIG-roles}}{\typeout{!! CONFIG-roles.tex not found}}
+\IfFileExists{CONFIG-investigators.csv}{%
+    }{\typeout{!! CONFIG-investigators.csv not found}}
+    \IfFileExists{CONFIG-institutions.csv}{%
+    \input{make-institution-acronyms.tex}
+  }{\typeout{!! CONFIG-institutions.csv not found}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% Cover page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{summary-cover}
+
+%%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{summary-abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

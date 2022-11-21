@@ -1,0 +1,26 @@
+institution,shortinst,instacro,pocname,poctel,pocemail,streetaddr,postaladdr
+% File must start with headers for the CSV data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Institution names (full and shorthand) for all participating institutions
+% Also includes the institution's administrative point of contact, their
+% contact info, and the institution's street and postal addresses.
+% 
+% Fields:
+%   institution: full name of institution
+%   shortinst: shorthand name of institution, used where you want to save space
+%   instacro: used to define acronym entries (using the glossaries package) to make 
+%   it easier to consistently reference the institution name.
+%   pocname: the full name of the institution's administrative point of contact
+%   poctel: administrative POC's telephone
+%   pocemail: administrative POC's email
+%   streetaddr: institution's street address (use \newline to separate lines)
+%   postaladdr: institution's postal address (use \newline to separate lines)
+%
+% When used for display purposes, the data will be presented in the order below,
+% so you are free to organize it as you prefer.  But for most purposes, alpha
+% order by institution will make the most sense (as opposed to, for example,
+% starting with the lead institution).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Institution B,Inst.~B,ib,I. M. Admin,(708) 555-1212,imadmin@example.com,123 Fourth Street\newline Podunk{,} NJ 99999,PO Box 987{,} Mailstop 1\newline East Podunk{,} NM 88888
+Institution iii,I3,iiii,Adi Min,(213) 555-1212,adimin@example.com,987 Sixth Street\newline Woodville{,} IL 77777,PO Box 456{,} Mailstop 2\newline Steelville{,} OH 66666
+Institution One,I1,io,B. Ureau Crat,(415) 555-1212,bureaucrat@example.com,927 Prime Avenue\newline Brazil{,} WY 55555,PO Box 135{,} Mailstop 7\newline Brazil{,} MT 44444
