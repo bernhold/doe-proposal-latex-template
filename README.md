@@ -13,7 +13,7 @@ A LaTeX template for proposals to the U.S. Department of Energy Office of Scienc
 ## Basic usage
 
 The `.latexmkrc` file specifies two "default files" to build:
-* `summary.tex` -- the project summary or abstract document, which is submitted separately from the main proposal document.
+* `project-summary.tex` -- the project summary or abstract document, which is submitted separately from the main proposal document.
 * `proposal.tex` -- the main proposal document, including the title page(s), narrative, and appendices that are required.
 
 To build, simply invoke `latexmk -pdf`
@@ -46,10 +46,10 @@ The contact info is needed only for lead- or co-PIs.  For others it must be pres
 Defines the various roles that investigators can have in the proposal.  Traditionally, DOE recognizes exactly one Lead Principal Investigator, exactly one co-PI (or institutional PI) per participating institution, and everyone else named in the proposal is Senior Personel.
 
 The role macros defined here should be used to designate each person's role in `CONFIG-investigators.csv`.  The `\rolelpi` and `\rolecpi` roles specifically are used in a number of places where the list of investigators is processed where only the PIs are desired. If you want to define different roles, you may also need to modify to the code where they are processed to ensure that the right people are listed.  Currently, that includes the following files:
-* `collaborative-supplement.tex`
-* `make-pi-acronyms.tex`
+* `frontmatter/collaborative-supplement.tex`
+* `utilities/make-pi-acronyms.tex`
 * `proposal.tex`
-* `summary-cover.tex`
+* `project-summary/cover.tex`
 
 ## Adding content
 
@@ -57,13 +57,19 @@ Once the configuration is complete, you'll obviously need to add the actual cont
 
 ### Project summary
 
-The project summary consists of a cover page with the title and participants and a one-page abstract.  `summary.tex` is the top level document for the project summary.  You'll need to put your abstract in `summary-abstract.tex`, but the rest should be automatic.
+The project summary consists of a cover page with the title and participants and a one-page abstract.  `project-summary.tex` is the top level document for the project summary.  The files are in the `project-summary` directory.  `cover.tex` should be fully automated.  Add your abstract to `abstract.tex`.
 
 ### Main proposal
 
+### Frontmatter
+
+`frontmatter/FRONTMATTER.tex` is setup to generate one titlepage per institution and the collaborative supplement.  Each submitting institution will need to remove the titlepages other than theirs (e.g., using Adobe Acrobat).
+
+`frontmatter/collaborative-supplement.tex` is required for collaborative proposals.  The template generates a budget table (as required) based on `CONFIG-budget.csv`.  The template works for three year proposals.  If your period of performance is anything else, you'll need to modify section where the budget table is generated.
+
 ### Narrative
 
-`narrative.tex` is the main file for the narrative.  To keep things sensible, we recommend that this file consist simply of a series of `\input` commands referencing files in the `narrative/` directory for the real content.
+`narrative/NARRATIVE.tex` is the main file for the narrative.  To keep things sensible, we recommend that this file consist simply of a series of `\input` commands referencing files in the `narrative/` directory for the real content.
 
 ### Graphics
 
@@ -75,30 +81,31 @@ Graphics should be collected in the `graphics/` directory, no matter where they 
 
 ### Facilities and equipment appendices
 
+You may not need both. Currently, `equipment/EQUIPMENT.tex` is setup to refer to the facilities appendix (since it is nominally required, you don't want to leave it out).  But you can switch to using the institutional includes by changing what's commented in the file.  You can also it manually if you prefer.  `facilities/FACILITIES.tex` is setup similarly, but the default is to use the institutional includes.
+
 These appendices are normally constructed as a section per participating institution, in the directories `facilities/` or `equipment/`.  In this template, we iterate over the institutions (as defined in `CONFIG-institutions.csv`) and to a "smart include" of one file per institution with the same name as the acronym key given in the configuration file.
 
-The smart include will look for either a `.tex` file or a `.pdf` file, in that order.  So for `ornl` it would first look for `ornl.tex` and if that's not found, `ornl.pdf`.  If neither is found, a warning message is displayed at that location in the `proposal.pdf`.
+The smart include will look for either a `.tex` file or a `.pdf` file, in that order.  So for `ornl` it would first look for `ornl.tex` and if that's not found, `ornl.pdf`.  If neither is found, a warning message is displayed at that location in the `proposal.pdf`. **Note: filenames are case-sensitive on most filesystems.**
 
 The expectation is that each institution's contribution will be at the `\section` level (in LaTeX) and will start on a new page.  **PDF documents should *not* have page numbers** -- they will be added by the smart include process to be consistent with the numbering of the overall proposal.
 
 ### Data management plan and PIER plan appendices
 
-Content for these appendices can be added directly to `data-plan.tex` and `pier-plan.tex`, respectively.
+Content for these appendices can be added directly to `data-plan/DATA-PLAN.tex` and `pier-plan/PIER-PLAN.tex`, respectively.
 
 ## Modifications
 
 Of course you're free to modify anything and everything however you like.  But a few notes that might help.
+
+### `acronyms.tex`
+
+Using a LaTeX package to help with acronyms can ensure that they get expanded on first use, wherever that happens.  This template is set up to use the `glossaries` package for ths.  But its use is entirely optional.  I've seeded `acronyms.tex` with some DOE-related acronyms, but you're free to change or remove them.
+
+If you do use it, you should add acronym definitions to `acronyms.tex`.  It is read in both the proposal and the project summary.  If you don't want to use it, you can ignore it or delete it.
+
 
 ### `preamble.tex`
 
 Contains all of the package inclusions, many macro definitions (e.g., the smart includes used in the facilities and equipment appendices).  This includes many of the commands needed to tweak the spacing and other formatting of the LaTeX engine.  In so far as reasonable, I've tried to stick (close) to the defaults for a standard LaTeX report in 11pt.  But if (when?) you need to start tweaking for space, you'll find most of what you can play with here, but commented out.
 
 This is also the place to define new macros that are used elsewhere in the document.
-
-### `summary-cover.tex`
-
-If you have a very long list of investigators, you may need to change how the table is presented here.
-
-### `collaborative-supplement.tex`
-
-DOE asks for a lot of stuff here, and my understanding is that it all goes on a single page.  In addition to being very terse (and maybe referencing within the main body of the proposal?), you might need to tweak things here to conserve space.

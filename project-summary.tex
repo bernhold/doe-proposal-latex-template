@@ -16,6 +16,12 @@
 %%%%% Setup packages, style, etc. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{preamble} %% Use the same preamble as for the main proposal
 
+%%%%% Read acronym definitions if available %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{acronyms.tex}{%
+  \input{acronyms}}{%
+  \typeout{Info: acronyms.tex not found}
+}
+
 %%%%% Check for needed configuration info %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \IfFileExists{CONFIG-proposal.tex}{%
     \input{CONFIG-proposal}}{\typeout{!! CONFIG-proposal.tex not found}}
