@@ -8,6 +8,12 @@
 %%%%% Setup packages, style, etc. %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{preamble} %% Use the same preamble as for the project summary
 
+%%%%% Read acronym definitions if available %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{acronyms.tex}{%
+  \input{acronyms}}{%
+  \typeout{Info: acronyms.tex not found}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -18,31 +24,17 @@
 \IfFileExists{CONFIG-roles.tex}{%
     \input{CONFIG-roles}}{\typeout{!! CONFIG-roles.tex not found}}
 \IfFileExists{CONFIG-institutions.csv}{%
-      \input{make-institution-acronyms.tex}
+      \input{utilities/make-institution-acronyms.tex}
     }{\typeout{!! CONFIG-institutions.csv not found}}
 \IfFileExists{CONFIG-investigators.csv}{%
-    \input{make-pi-acronyms.tex}
+    \input{utilities/make-pi-acronyms.tex}
     }{\typeout{!! CONFIG-investigators.csv not found}}
 
 \pagenumbering{roman}
 
-%%%%% Title page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Frontmatter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Generate one title page for each lead- or co-PI found in the
-% CONFIG-investigators.csv file.
-\csvreader[%
-  head to column names,
-  filter ifthen = {\equal{\role}{\rolelpi}\OR\equal{\role}{\rolecpi}}
-]{CONFIG-investigators.csv}{}{%
-  \input{titlepage}
-  \setcounter{page}{1}  %% Each of these is page 1 of someone's submission
-}
-
-%%%%% Collaborative Supplement %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% This is a supplement to the title page which is required for collaborative
-% proposals.  COMMENT THIS OUT FOR SINGLE-INSTITUTION PROPOSALS.
-
-\input{collaborative-supplement}
+\input{frontmatter/FRONTMATTER}
 
 %%%%% Table of Contents %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -59,9 +51,13 @@
 \pagenumbering{arabic}
 \pagestyle{fancy}
 
+%%%%% Reset acronym expansion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\IfFileExists{acronyms.tex}{\glsresetall[acronym]}{}
+
 %%%%% Narrative %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{narrative}
+\input{narrative/NARRATIVE}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % START APPENDICES
@@ -76,34 +72,40 @@
 \titleformat{\chapter}[hang]
    {\normalfont\Huge\bfseries}{\chaptertitlename~\thechapter.}{10pt}{\Huge}
 
+%%%%% Reset acronym expansion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Uncomment if you want to reset acronym expansion for the appendices
+% To reset expansion for *every* appendix, you'll need to copy this.
+
+% \IfFileExists{acronyms.tex}{\glsresetall[acronym]}{}
+
 %%%%% 1. Bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\bibname}{Bibliography and References Cited}
-\bibliographystyle{cv}
+\renewcommand{\bibname}{References Cited}
+\bibliographystyle{bib/cv}
 
 % Multiple bib files are possible.  Format is comma separated list,
 % relative to this directory, without .bib suffix.  So bib/a,bib/b,...
-\bibliography{bib/\jobname}
+\bibliography{bib/proposal}
 
 %%%%% 2. Facilities %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{facilities}
+\input{facilities/FACILITIES}
 
 %%%%% 3. Equipment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{equipment}
+\input{equipment/EQUIPMENT}
 
 %%%%% 4. Data Management Plan %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{data-plan}
+\input{data-plan/DATA-PLAN}
 
 %%%%% 5. PIER Plan %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{pier-plan}
+\input{pier-plan/PIER-PLAN}
 
 %%%%% 6. Other Attachments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% It is rare that other attachments are needed.
-\IfFileExists{other-attachments.tex}{\input{other-attachments}}{}
+% % It is rare that other attachments are needed.
+% \IfFileExists{other-attachments.tex}{\input{other-attachments}}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}

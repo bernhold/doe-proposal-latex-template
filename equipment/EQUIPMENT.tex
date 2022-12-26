@@ -1,0 +1,43 @@
+\chapter{Equipment}
+\label{sec:equipment}
+
+% Four likely scenarios for this appendix:
+%
+% 1. Everything is covered in the facilities appendix and we just refer there.
+% 2. Include per-institution files from this directory based on the CONFIG info
+% 3. Just put your content here or \input{} it (esp. single-institution proposals)
+%
+% Just comment/uncomment the desired choice below
+
+%%%%% 1. Refer to facilities %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Major equipment and facilities available to the project team is described in Appendix~\ref{sec:facilities}.
+
+%%%%% 2. Include file per institution %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The smartinclude command will look for a TeX file, then a PDF file, so either 
+% can be supplied.  TeX following an agreed format will give the greatest level
+% of consistency and polish to this section, but PDF is better than nothing.
+
+% REQUIREMENT: file names correspond to the institution's shorthand (the 
+% instacro field in CONFIG-institutions.csv), e.g., ornl.tex or ornl.pdf.  This 
+% is case sensitive on most filesystems.
+
+% \vspace{0.5in}
+% \noindent Descriptions of equipment available at 
+% each institution.
+
+% % TODO: It would be nice to get rid of the indentation caused by the current
+% % \etocsettocstyle with empty arguments
+% \etocsettocstyle{}{}
+% \etocchecksemptiness
+% \localtableofcontentswithrelativedepth{1}
+
+% \csvreader[%
+%   head to column names,
+% ]{CONFIG-institutions.csv}{}{%
+%     \newpage
+%     \smartinclude{\glsentrylong{\instacro}}{equipment/\instacro}
+% }
+
+%%%%% 3. Manual %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

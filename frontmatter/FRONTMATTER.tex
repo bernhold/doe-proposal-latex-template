@@ -1,0 +1,17 @@
+% Titlepage and Collaborative Supplement
+
+% Generate one title page for each lead- or co-PI found in the
+% CONFIG-investigators.csv file.
+\csvreader[%
+  head to column names,
+  filter ifthen = {\equal{\role}{\rolelpi}\OR\equal{\role}{\rolecpi}}
+]{CONFIG-investigators.csv}{}{%
+  \input{frontmatter/titlepage}
+  \setcounter{page}{1}  %% Each of these is page 1 of someone's submission
+}
+
+%%%%% Collaborative Supplement %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is a supplement to the title page which is required for collaborative
+% proposals.  COMMENT THIS OUT FOR SINGLE-INSTITUTION PROPOSALS.
+
+\input{frontmatter/collaborative-supplement}

@@ -1,1 +1,1 @@
-@default_files = ('summary.tex', 'proposal.tex');
+@default_files = ('project-summary.tex', 'proposal.tex');

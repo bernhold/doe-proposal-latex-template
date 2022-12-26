@@ -1,6 +1,6 @@
 TeX sources for the technical narrative of the proposal.  
 
-Inclusion of files at the top level is defined in ../narrative.tex.
+Inclusion of files at the top level is defined in NARRATIVE.tex.
 The narrative is a chapter.  Experience suggests that a file per
 \subsection is a good granularity to minimize collisions during
 editing.  It is simplest to keep this directory flat rather than

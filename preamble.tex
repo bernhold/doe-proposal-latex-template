@@ -60,8 +60,9 @@
 \usepackage{appendix}
 \usepackage[chapter,numbib]{tocbibind}
 \usepackage{etoc}             %% To get easy local table of contents
-\usepackage{todonotes}
+\usepackage{todonotes}        %% Add [disable] option to quickly get rid of all notes
 \usepackage{lipsum}           %% Used for placeholder text
+\usepackage[symbol*]{footmisc} %% Use symbols for footnotes to help distinguish from citations
 
 %%%%% Packages to avoid, and alternatives
 % epsfig: already using graphicx
@@ -71,6 +72,9 @@
 % remove red border around links (comment out if you want the border)
 %\hypersetup{pdfborder={0 0 0}}
 \hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue,pdfborder={0 0 0}}
+
+%%%%% Todo notes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setuptodonotes{inline}
 
 %%%%% Headers and footers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

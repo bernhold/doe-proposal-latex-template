@@ -1,6 +1,6 @@
 BibTeX files referenced by the technical narrative of the proposal.
 
-These bib files need to be listed in the \bibliography command in
+These bib files need to be listed in the \bibliography{} command in
 ../proposal.tex.
 
 You are free to organize these files however you like. A single
