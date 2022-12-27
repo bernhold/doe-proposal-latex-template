@@ -109,3 +109,14 @@ If you do use it, you should add acronym definitions to `acronyms.tex`.  It is r
 Contains all of the package inclusions, many macro definitions (e.g., the smart includes used in the facilities and equipment appendices).  This includes many of the commands needed to tweak the spacing and other formatting of the LaTeX engine.  In so far as reasonable, I've tried to stick (close) to the defaults for a standard LaTeX report in 11pt.  But if (when?) you need to start tweaking for space, you'll find most of what you can play with here, but commented out.
 
 This is also the place to define new macros that are used elsewhere in the document.
+
+## Potential Problems
+
+The last time I used this template, we were working both locally and on Overleaf.  We experienced a number of problems on Overleaf and on one of the local systems which appear to be related to package versions.  We ended up incorporating key packages into the working repository to ensure that we were using the same versions everywhere, and that they were the latest.  The following packages presented problems:
+
+* csvsimple
+* glossaries
+* pst-xkey
+* xkeyval
+
+It is worth noting that Overleaf was not absolutely up to date w.r.t. package versions.
